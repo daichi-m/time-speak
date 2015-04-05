@@ -7,6 +7,6 @@
  * It is designed to accept all args valid for espeak(3) as well as some additional
  * args. See timeprompt --usage 
  */
-int main(char argc, char *argv[]) {
-
+int main(int argc, char *argv[]) {
+	return 0;
 }
