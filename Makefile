@@ -1,7 +1,9 @@
 CC=gcc
 CFLAGS=-c -Wall -g
+CUNIT_FLAG=-lcunit
 EXECUTABLE_DIR=bin
 EXECUTABLE=time_prompt
+TEST_EXECUTABLE=test
 OBJECT_DIR=obj
 SRC=src
 TEST=test
@@ -25,3 +27,15 @@ clean:
 	rm -f $(OBJECT_DIR)/*.o 
 	rm -f $(EXECUTABLE_DIR)/$(EXECUTABLE)
 	rm -rf $(EXECUTABLE_DIR)
+	rm -f $(TEST)/*.o
+	rm -f $(TEST)/$(TEST_EXECUTABLE)
+
+test: test_main.o test_time_prompt.o time_prompt.o
+	$(CC)  $(TEST)/test_main.o  $(TEST)/test_time_prompt.o  $(OBJECT_DIR)/time_prompt.o -o $(TEST)/$(TEST_EXECUTABLE)	$(CUNIT_FLAG)
+	$(TEST)/$(TEST_EXECUTABLE)
+
+test_main.o: $(TEST)/test_main.c
+	$(CC)  $(CFLAGS)  $(CUNIT_FLAG)  $(TEST)/test_main.c 	-o $(TEST)/test_main.o
+
+test_time_prompt.o: $(TEST)/test_time_prompt.c
+	$(CC)  $(CFLAGS) $(CUNIT_FLAG)  $(TEST)/test_time_prompt.c  -o $(TEST)/test_time_prompt.o
