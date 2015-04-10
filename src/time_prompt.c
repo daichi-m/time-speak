@@ -22,18 +22,17 @@ char *the_tens[] = {"ten", "twenty", "thirty", "forty", "fifty", "sixty", "seven
 char*
 number_to_text(int number, char *return_buffer) {
 
-	if(number > MAX_NUMBER_CONVERSION_SUPPORTED) {
-		return NULL;
+	return_buffer[0] = '\0' ;
+	if(number <= 0 || number >= MAX_NUMBER_CONVERSION_SUPPORTED) {
+		return return_buffer;
 	}
 	
-	return_buffer[0] = '\0';
+	
 
 	int hundreds, tens, ones;
 	ones = number % 10;
 	tens = (number / 10) % 10;
 	hundreds = (number / 100) % 10;
-
-	// printf("number: %d, hundreds: %d, tens: %d, ones: %d\n", number, hundreds, tens, ones);
 
 	if(hundreds != 0) {
 		strcat(return_buffer, one_to_twenty[hundreds - 1]);
